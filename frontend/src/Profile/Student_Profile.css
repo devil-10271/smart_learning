@@ -1,0 +1,163 @@
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0d1117;
+  color: #c9d1d9;
+}
+
+.student-profile {
+  display: flex;
+  padding: 40px;
+  max-width: 1400px;
+  margin: auto;
+  gap: 50px;
+}
+
+/* Left Panel */
+.left-panel {
+  width: 320px;
+  background: #161b22;
+  padding: 25px;
+  border-radius: 15px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.profile-pic-section {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.profile-pic {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #30363d;
+}
+
+.profile-placeholder {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: #21262d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: #8b949e;
+  border: 2px dashed #444c56;
+}
+
+.hidden-input {
+  display: none;
+}
+
+.username {
+  color: #8b949e;
+  margin: 8px 0;
+  font-size: 16px;
+}
+
+.bio {
+  font-size: 15px;
+  color: #c9d1d9;
+}
+
+/* Right Panel */
+.right-panel {
+  flex: 1;
+  background: #161b22;
+  padding: 25px;
+  border-radius: 15px;
+}
+
+.right-panel h3 {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.info-form input,
+.info-form textarea {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 14px;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  background: #0d1117;
+  color: #c9d1d9;
+  font-size: 15px;
+}
+
+.info-form input:focus,
+.info-form textarea:focus {
+  outline: none;
+  border-color: #58a6ff;
+}
+
+.info-form textarea {
+  resize: none;
+  height: 70px;
+}
+
+/* Contributions Grid */
+.contributions {
+  margin-top: 25px;
+}
+
+.contributions h4 {
+  margin-bottom: 12px;
+  font-size: 18px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(14, 20px);
+  gap: 6px;
+}
+
+.grid-cell {
+  width: 20px;
+  height: 20px;
+  background: #161b22;
+  border-radius: 4px;
+  border: 1px solid #30363d;
+}
+
+.grid-cell.active {
+  background: #238636;
+}
+
+/* Responsive Layout */
+@media (max-width: 900px) {
+  .student-profile {
+    flex-direction: column;
+    gap: 30px;
+    padding: 20px;
+  }
+
+  .left-panel {
+    width: 100%;
+  }
+
+  .right-panel {
+    width: 100%;
+  }
+
+  .grid {
+    grid-template-columns: repeat(10, 18px);
+  }
+}
+
+@media (max-width: 600px) {
+  .profile-pic,
+  .profile-placeholder {
+    width: 140px;
+    height: 140px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(7, 16px);
+  }
+}
