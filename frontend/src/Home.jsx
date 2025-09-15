@@ -10,8 +10,12 @@ import Prog from "./Programs/Programs";
 import Nav from "./Basics/Navbar"
 // import SP from "./Profile/Student_Profile";s
 import Foot from "./Basics/footer";
+import { ToastContainer } from 'react-toastify';
+import StudentProfile from "./Profile/Student_Profile";
 
 import axios from "axios";
+import FacultyProfile from "./Profile/Faculty_profile";
+// import PortalPage from "./Auth/Choose";
 
 
 
@@ -87,10 +91,6 @@ function App() {
       <h5>{data.District}</h5>
     </div>
     ))} */}
-
-
-
-
     <Routes>
       {/* ====== HOME PAGE ====== */}
       <Route
@@ -98,7 +98,7 @@ function App() {
         element={
           <>
             {/* ====== HEADER ====== */}
-            <Nav/>
+            <Nav data={1}/>
             {/* ====== HERO SECTION ====== */}
             <section className="hero">
               <div className="hero-content">
@@ -217,15 +217,19 @@ function App() {
             <Foot/>
             {/* <SP></SP> */}
 
+            <ToastContainer/>
           </>
         }
       />
 
       {/* ====== AUTH PAGES ====== */}
-      <Route path="/Login" element={<Login />} />
+      <Route path="/Login" element={<Login/>} />
       <Route path="/Signup" element={<Signup />} />
       <Route path="/About_us" element={<AboutUs/>}/>
       <Route path="/Programs" element={<Prog/>}/>
+      <Route path="/Student_profile" element={<StudentProfile/>}/>
+      <Route path="/Faculty_profile" element={<FacultyProfile/>}/>
+
     </Routes>
   </>
 

@@ -1,163 +1,217 @@
-body {
+/* === Base Reset === */
+* {
+  box-sizing: border-box;
   margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background: #0d1117;
-  color: #c9d1d9;
+  padding: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
 }
 
+:root {
+  --card-bg: #ffffff;
+  --muted: #6b7280;
+  --accent: #4f46e5;
+  --radius: 12px;
+  --shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+}
+
+/* === Main Container === */
 .student-profile {
-  display: flex;
-  padding: 40px;
-  max-width: 1400px;
-  margin: auto;
-  gap: 50px;
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 24px;
+  max-width: 1100px;
+  margin: 28px auto;
+  padding: 20px;
+  align-items: start;
+  box-sizing: border-box;
 }
 
-/* Left Panel */
+/* === Left Panel (Profile Summary) === */
 .left-panel {
-  width: 320px;
-  background: #161b22;
-  padding: 25px;
-  border-radius: 15px;
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px;
   text-align: center;
-  flex-shrink: 0;
 }
 
 .profile-pic-section {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
+  width: 140px;
+  height: 140px;
+  margin: 0 auto 12px;
+  position: relative;
 }
 
-.profile-pic {
-  width: 180px;
-  height: 180px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid #30363d;
-}
-
-.profile-placeholder {
-  width: 180px;
-  height: 180px;
-  border-radius: 50%;
-  background: #21262d;
+.pic-label {
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
-  color: #8b949e;
-  border: 2px dashed #444c56;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px dashed #eceef6;
+  transition: border-color 0.18s, transform 0.12s;
+  background: #fbfdff;
 }
 
+.pic-label:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.profile-pic {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.profile-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+/* hide the raw file input */
 .hidden-input {
   display: none;
 }
 
+.left-panel h2 {
+  margin-top: 10px;
+  font-size: 1.2rem;
+}
+
 .username {
-  color: #8b949e;
-  margin: 8px 0;
-  font-size: 16px;
+  color: var(--muted);
+  margin-top: 6px;
 }
 
 .bio {
-  font-size: 15px;
-  color: #c9d1d9;
+  margin-top: 8px;
+  color: #374151;
+  font-size: 0.95rem;
 }
 
-/* Right Panel */
+/* === Right Panel (Form + Contributions) === */
 .right-panel {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px;
+}
+
+/* === Form === */
+.info-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.names {
+  display: flex;
+  gap: 12px;
+}
+
+.names input {
   flex: 1;
-  background: #161b22;
-  padding: 25px;
-  border-radius: 15px;
 }
 
-.right-panel h3 {
-  font-size: 20px;
-  margin-bottom: 15px;
-}
-
-.info-form input,
-.info-form textarea {
+/* Inputs, Textarea, Selects */
+input[type="text"],
+textarea,
+select {
   width: 100%;
-  padding: 14px;
-  margin-bottom: 14px;
-  border: 1px solid #30363d;
-  border-radius: 8px;
-  background: #0d1117;
-  color: #c9d1d9;
-  font-size: 15px;
-}
-
-.info-form input:focus,
-.info-form textarea:focus {
+  padding: 10px 12px;
+  border: 1px solid #e6e7ee;
+  border-radius: 10px;
+  font-size: 0.95rem;
   outline: none;
-  border-color: #58a6ff;
+  background: #fff;
+  transition: border-color 0.14s, box-shadow 0.14s;
+  box-sizing: border-box;
 }
 
-.info-form textarea {
-  resize: none;
-  height: 70px;
+input[type="text"]:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 8px 20px rgba(79, 70, 229, 0.06);
 }
 
-/* Contributions Grid */
+textarea {
+  min-height: 84px;
+  resize: vertical;
+}
+
+/* Disabled course select */
+select:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+/* Remove default arrows (for consistent style) */
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='%236b7280' height='18' viewBox='0 0 24 24' width='18' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 34px;
+}
+
+/* === Contributions Grid === */
 .contributions {
-  margin-top: 25px;
+  margin-top: 14px;
 }
 
 .contributions h4 {
-  margin-bottom: 12px;
-  font-size: 18px;
+  margin-bottom: 8px;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(14, 20px);
   gap: 6px;
+  grid-template-columns: repeat(14, 1fr);
 }
 
 .grid-cell {
-  width: 20px;
-  height: 20px;
-  background: #161b22;
-  border-radius: 4px;
-  border: 1px solid #30363d;
+  aspect-ratio: 1 / 1; /* square boxes */
+  border-radius: 6px;
+  background: #f1f5f9;
+  transition: transform 0.12s, box-shadow 0.12s;
 }
 
 .grid-cell.active {
-  background: #238636;
+  background: linear-gradient(135deg, #34d399, #60a5fa);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(96, 165, 250, 0.12);
 }
 
-/* Responsive Layout */
-@media (max-width: 900px) {
+/* === Responsive Design === */
+@media (max-width: 800px) {
   .student-profile {
+    grid-template-columns: 1fr;
+    padding: 12px;
+    gap: 16px;
+  }
+
+  .names {
     flex-direction: column;
-    gap: 30px;
-    padding: 20px;
   }
 
-  .left-panel {
-    width: 100%;
-  }
-
-  .right-panel {
-    width: 100%;
+  .profile-pic-section {
+    width: 120px;
+    height: 120px;
   }
 
   .grid {
-    grid-template-columns: repeat(10, 18px);
-  }
-}
-
-@media (max-width: 600px) {
-  .profile-pic,
-  .profile-placeholder {
-    width: 140px;
-    height: 140px;
-  }
-
-  .grid {
-    grid-template-columns: repeat(7, 16px);
+    grid-template-columns: repeat(7, 1fr);
   }
 }

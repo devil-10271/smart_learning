@@ -1,10 +1,17 @@
 import React, { useState } from "react";
 import "./Login.css";
 import { Link } from 'react-router-dom';
-import Student_Profile from "../Profile/Student_Profile";
+import { useNavigate } from 'react-router-dom';
+// import SP from "../Profile/Student_Profile";
+// import Student_Profile from "../Profile/Student_Profile";
+import axios from "axios";
+import { handleError } from '../Basics/Noti';
+
 
 
 function Login() {
+
+  const Navig = useNavigate()
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
@@ -34,17 +41,45 @@ function Login() {
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
-      return Student_Profile;
+      return;
     }
 
     setErrors({});
     console.log("Email:", email);
     console.log("Password:", password);
     console.log("Role:", role);
-    alert("Login submitted!");
+
+    axios.post("http://localhost:8081/Login", [email, password, role])
+      .then(res => {
+        localStorage.removeItem('email');
+        localStorage.removeItem('role');
+        if (res.data.fetch_data.length === 0) {
+          handleError("No user Found . please check the data inputs !!") ||
+            alert("No user Found . please check the data inputs !!")
+        }
+        const one_user = res.data.fetch_data[0]
+        if (res.data.fetch_data.length === 1) {
+          localStorage.setItem("email", one_user.email);
+          localStorage.setItem("role", one_user.role);
+
+          if (localStorage.getItem("role") === "faculty") {
+            setTimeout(() => {
+              Navig("/Faculty_profile"); // ✅ fixed
+            }, 1000);
+          } else if (localStorage.getItem("role") === "student") {
+
+            setTimeout(() => {
+              Navig("/Student_profile"); // ✅ fixed
+            }, 1000);
+          }
+        }
+      })
+      .catch(err => console.log(err))
   };
 
+
   return (
+
     <div className="login-container d-flex justify-content-center align-items-center position-relative">
       {/* Background Academic Icons */}
       <div className="academic-icon" style={{ top: "50px", left: "50px" }}>
@@ -53,7 +88,7 @@ function Login() {
         </svg>
       </div>
 
-    
+
       {/* Main Login Card */}
       <div className="card" style={{ width: "420px", maxWidth: "90vw", padding: "1rem 2rem" }}>
         {/* Header */}
@@ -64,7 +99,7 @@ function Login() {
               width: "70px",
               height: "70px",
               background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-              
+
             }}
           >
             <svg width="35" height="35" fill="white" viewBox="0 0 24 24">
@@ -188,11 +223,14 @@ function Login() {
 
         <div className="text-center mt-2">
           <span className="small text-muted">Don't have an account? </span>
-         <Link to="/signup">Sign Up</Link>
+          <Link to="/signup">Sign Up</Link>
         </div>
+
 
       </div>
     </div>
+
+
   );
 }
 

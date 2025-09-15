@@ -1,29 +1,30 @@
-*{
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
+/* Background container */
 .login-container {
-  background: url('../assets/images/bg.png');
-  background-repeat: no-repeat;
-  background-size: cover;
+  background: url('../assets/images/bg.png') no-repeat center center/cover;
   min-height: 100vh;
   min-width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
-} 
+}
 
+/* Card styling */
 .card {
   border-radius: 20px;
   border: none;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);
   background: rgba(255, 255, 255, 0.95);
+  padding: 2rem;
 }
 
+/* Gradient header text */
 .header1 {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   -webkit-background-clip: text;
@@ -31,17 +32,29 @@
   background-clip: text;
 }
 
+/* Input fields */
 .input-group {
   position: relative;
+  margin-bottom: 1.2rem;
 }
 
 .input {
-  border-radius: 12px !important; /* Increased border radius */
+  width: 100%;
+  border-radius: 12px;
   border: 2px solid #e9ecef;
   transition: all 0.3s ease;
-  padding-left: 3rem;
+  padding: 0.8rem 1rem 0.8rem 3rem;
+  font-size: 1rem;
+  background: #fff;
 }
 
+.input:focus {
+  border-color: #764ba2;
+  box-shadow: 0 0 0 2px rgba(118, 75, 162, 0.15);
+  outline: none;
+}
+
+/* Input icons */
 .input-icon {
   position: absolute;
   left: 12px;
@@ -49,31 +62,41 @@
   transform: translateY(-50%);
   z-index: 5;
   color: #6c757d;
+  font-size: 1.2rem;
 }
 
+/* Buttons */
 .button {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   border: none;
   border-radius: 12px;
   padding: 12px;
   font-weight: 600;
-  transition: all 0.3s ease;
-  transform: scale(1);
-  color: white;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
 }
 
+.button:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+}
+
+/* Decorative academic icon */
 .academic-icon {
   position: absolute;
   opacity: 0.1;
   color: #667eea;
+  font-size: 5rem;
+  pointer-events: none;
 }
 
+/* Custom Select Box */
 .form-select.input {
+  width: 100%;
   border-radius: 12px;
   border: 2px solid #e9ecef;
-  padding-left: 1rem;
-  padding-right: 2rem;
-  height: 48px;
+  padding: 0.8rem 2.5rem 0.8rem 1rem;
   font-size: 1rem;
   background: #f8f9fa;
   color: #333;
@@ -81,6 +104,12 @@
   box-shadow: 0 2px 8px rgba(102, 126, 234, 0.08);
   appearance: none;
   outline: none;
+
+  /* Custom dropdown arrow */
+  background-image: url("data:image/svg+xml;charset=UTF-8,<svg width='20' height='20' fill='gray' xmlns='http://www.w3.org/2000/svg'><path d='M7 8l5 5 5-5H7z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1.2em;
 }
 
 .form-select.input:focus {
@@ -94,12 +123,4 @@
   color: #333;
   padding: 10px;
   font-size: 1rem;
-}
-
-/* Add a custom dropdown arrow */
-.form-select.input {
-  background-image: url("data:image/svg+xml;charset=UTF-8,<svg width='20' height='20' fill='gray' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5H7z'/></svg>");
-  background-repeat: no-repeat;
-  background-position: right 1rem center;
-  background-size: 1.2em;
 }

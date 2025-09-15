@@ -3,6 +3,7 @@ import { Link, useNavigate} from 'react-router-dom';
 import './SignUp.css';
 import { FaUser, FaEnvelope, FaLock, FaUserGraduate } from 'react-icons/fa';
 import axios from "axios";
+import { handleError,handleSucess } from '../Basics/Noti';
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
@@ -56,16 +57,21 @@ const SignUp = () => {
     .then(res => {
       console.log(res,res.data.code)
       if(res.data.code==="ER_DUP_ENTRY") {
-        alert("Email id is already exists")
+        handleError("Email id is already exists") || alert("Email id is already exists")
+        setTimeout(()=>{
+          console.log(res.data.code)
+        },1000)
       }if(res.data==="Signup Successfully"){
-        alert("Signup Successfully")
-        Navig('/Login')
+        handleSucess("Signup Sucessfully") || alert("Signup Sucessfully")
+        setTimeout(() => {
+          Navig("/Login");
+        }, 2000);
       }
-     
     })
     .catch(err => console.log(err))
   };
 
+  
   return (
     <div className="signup-container">
       <div className="signup-wrapper">
@@ -73,6 +79,7 @@ const SignUp = () => {
           <h2>Sign Up</h2>
           <p>Join our learning community today</p>
         </div>
+
 
         <form onSubmit={handleSubmit} className="signup-form">
           <div className="input-group">

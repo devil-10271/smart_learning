@@ -56,17 +56,32 @@ app.post('/Sign_up', (req, res) => {
         req.body.role,
     ]
 
-
     db.query(que, signup_data, (err, data) => {
         if (err) {
             console.error("DB Error:", err);
             return res.json(err);
         }
-        res.json(message="Signup Successfully");
+        res.json("Signup Successfully");
     });
 });
 
+app.post("/Login",(req,res)=>{
+    console.clear();
+    // console.log("request : ",req.body)
+    // console.log(chl_data)
+    const que = `SELECT * FROM SIGNUP where email=? and password =? and role=?;`
 
+    db.query(que,req.body,(err,data)=>{
+        if(err){
+            // console.error("LOGIN ERROR : ",err)
+            return res.json(err) 
+        }
+        // console.log(data,err)   
+        res.json({message:"Login Sucess",fetch_data:data})
+
+    })
+
+})
 
 const port = 8081
 app.listen(port, () => {

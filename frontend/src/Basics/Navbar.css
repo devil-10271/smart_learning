@@ -44,6 +44,16 @@ nav ul li a {
   transition: color 0.3s;
   border-radius: 90px;
 }
+button{
+  border: none;
+  /* padding: 20px; */
+  color: white;
+  background-color: black;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+  border-radius: 90px;
+}
 
 nav ul li a:hover {
   color: #fdbb2d;
